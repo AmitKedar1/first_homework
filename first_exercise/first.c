@@ -1,6 +1,6 @@
 #include <stdio.h> 
 
-int main()
+int main(void)
 {
     double area;
     double sumS = 0.0;
@@ -55,4 +55,5 @@ int main()
     }
     printf("the sum of the traingles %f",sumS);
     printf(" and the average area of the traingles is %f",sumS/countS);
+    return 0;
 }
