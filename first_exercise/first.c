@@ -1,44 +1,57 @@
 #include <stdio.h> 
+#include <stdbool.h>
+
+bool IsTraingle(double first_triangle_side, double second_triangle_side, double third_triangle_side)
+{
+    return first_triangle_side + second_triangle_side > third_triangle_side && first_triangle_side + third_triangle_side > second_triangle_side && second_triangle_side + third_triangle_side > first_triangle_side;
+}
+
+bool IsRightTriangle(double first_triangle_side, double second_triangle_side, double third_triangle_side)
+{
+    return first_triangle_side*first_triangle_side + second_triangle_side*second_triangle_side == third_triangle_side*third_triangle_side;
+}
 
 int main(void)
 {
-    double area;
-    double sumS = 0.0;
-    int countS = 0;
-    double e1, e2, e3;
+    double area_of_traingle = 0 ;
+    double sum_of_area = 0;
+    int count_right_traingle = 0;
+    double first_triangle_side = 0;
+    double second_triangle_side = 0;
+    double third_triangle_side = 0;
+    double avg_area = 0;
+
     printf("Please enter first side to a traingle: \n");
-    scanf(" %lf", &e1);
+    scanf(" %lf", &first_triangle_side);
     printf("Please enter second side to a traingle: \n");
-    scanf(" %lf", &e2);
+    scanf(" %lf", &second_triangle_side);
     printf("Please enter third side to a traingle: \n");
-    scanf(" %lf", &e3);
-    while(e1 != 0.0 && e2 != 0.0 && e3 != 0.0)
+    scanf(" %lf", &third_triangle_side);
+
+    while(first_triangle_side != 0.0 && second_triangle_side != 0.0 && third_triangle_side != 0.0)
     {
-        printf("e1:%lf", e1);
-        printf(" e2:%lf", e2);
-        printf(" e3:%lf", e3);
-        if(e1 + e2 > e3 && e1 + e3 > e2 && e2 + e3 > e1)
+        if(IsTraingle(first_triangle_side,second_triangle_side,third_triangle_side))
         {
-            if(e1*e1 + e2*e2 == e3*e3)
+            if(IsRightTriangle(first_triangle_side, second_triangle_side, third_triangle_side))
             {
-                area = (e1 * e2)/2;
-                sumS += area;
-                countS += 1;
-                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area);
+                area_of_traingle = (first_triangle_side * second_triangle_side)/2;
+                sum_of_area += area_of_traingle;
+                count_right_traingle += 1;
+                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area_of_traingle);
             }
-            else if(e3*e3 + e2*e2 == e1*e1)
+            else if(IsRightTriangle(third_triangle_side, second_triangle_side, first_triangle_side))
             {
-                area = (e3 * e2)/2;
-                sumS += area;
-                countS += 1;
-                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area);
+                area_of_traingle = (third_triangle_side * second_triangle_side)/2;
+                sum_of_area += area_of_traingle;
+                count_right_traingle += 1;
+                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area_of_traingle);
             }
-            else if(e1*e1 + e3*e3 == e2*e2)
+            else if(IsRightTriangle(first_triangle_side,third_triangle_side,second_triangle_side))
             {
-                area = (e1 * e3)/2;
-                sumS += area;
-                countS += 1;
-                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area);
+                area_of_traingle = (first_triangle_side * third_triangle_side)/2;
+                sum_of_area += area_of_traingle;
+                count_right_traingle += 1;
+                printf("The Sides you gave make a right traingle and its area is: %.2f\n", area_of_traingle);
             }  
             else
             {
@@ -50,13 +63,14 @@ int main(void)
             printf("the 3 numbers cannot be a traingle\n");
         }
         printf("Please enter first side to a traingle: \n");
-        scanf("%lf", &e1);
+        scanf("%lf", &first_triangle_side);
         printf("Please enter second side to a traingle: \n");
-        scanf("%lf", &e2);
+        scanf("%lf", &second_triangle_side);
         printf("Please enter third side to a traingle: \n");
-        scanf("%lf", &e3);
+        scanf("%lf", &third_triangle_side);
     }
-    printf("the sum of the traingles %lf",sumS);
-    printf(" and the average area of the traingles is %lf",sumS/countS);
+    printf("the sum of the traingles %lf",sum_of_area);
+    avg_area = sum_of_area/count_right_traingle;
+    printf(" and the average area of the traingles is %lf",avg_area);
     return 0;
 }
